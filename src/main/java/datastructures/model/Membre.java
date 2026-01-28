@@ -1,15 +1,17 @@
 package datastructures.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Membre {
     private int id;
     private String nom;
     private String prenom;
     private String email;
-    private java.sql.Date dateAdhesion;
+    private LocalDateTime dateAdhesion;
 
-    public Membre(int id, String nom, String prenom, String email, java.sql.Date dateAdhesion) {
+    public Membre(int id, String nom, String prenom, String email, LocalDateTime dateAdhesion) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -53,11 +55,11 @@ public class Membre {
         this.email = email;
     }
 
-    public Date getDateAdhesion() {
+    public LocalDateTime getDateAdhesion() {
         return dateAdhesion;
     }
 
-    public void setDateAdhesion(Date dateAdhesion) {
+    public void setDateAdhesion(LocalDateTime dateAdhesion) {
         this.dateAdhesion = dateAdhesion;
     }
     // Getters et Setters...
