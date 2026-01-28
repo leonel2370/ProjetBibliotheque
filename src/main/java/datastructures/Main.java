@@ -15,90 +15,61 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        // Instanciation des services DAO
         LivreDAO livreDAO = new LivreDAO();
         MembreDAO membreDAO = new MembreDAO();
-        EmpruntDAO empruntDAO = new EmpruntDAO();
+        EmpruntDAO EmpruntDAO = new EmpruntDAO();
 
         int choix;
-
         do {
             System.out.println("\n--- GESTION BIBLIOTHÈQUE ---");
-            System.out.println("1. Ajouter un Livre");
-            System.out.println("2. Inscrire un Membre");
-            System.out.println("3. Emprunter un Livre");
-            System.out.println("4. Retourner un Livre");
-            System.out.println("5. Rechercher un Livre par titre");
+            System.out.println("1. Ajouter un livre");
+            System.out.println("2. Rechercher un livre");
+            System.out.println("3. Inscrire un membre");
+            System.out.println("4. Enregistrer un emprunt");
+            System.out.println("5. Afficher les emprunts en retard");
             System.out.println("6. Quitter");
-            System.out.print("Votre choix : ");
+            System.out.print(" Votre Choix : ");
 
             choix = scanner.nextInt();
-            scanner.nextLine(); // Consommer le retour à la ligne
+            scanner.nextLine();
 
             switch(choix) {
                 case 1:
-                    System.out.print("Titre : ");
-                    String titre = scanner.nextLine();
-                    System.out.print("Auteur : ");
-                    String auteur = scanner.nextLine();
-                    System.out.print("Catégorie : ");
-                    String cat = scanner.nextLine();
-                    System.out.print("Nombre d'exemplaires : ");
-                    int nb = scanner.nextInt();
-
-                    Livre nouveauLivre = new Livre(0, titre, auteur, cat, nb);
-                    livreDAO.ajouterLivre(nouveauLivre);
+                    System.out.print("Titre : "); String t = scanner.nextLine();
+                    System.out.print("Auteur : "); String a = scanner.nextLine();
+                    System.out.print("Catégorie : "); String c = scanner.nextLine();
+                    System.out.print("Nombre d'exemplaires : "); int n = scanner.nextInt();
+                    livreDAO.ajouterLivre(new Livre(0, t, a, c, n));
                     break;
-
                 case 2:
-                    System.out.print("Nom : ");
-                    String nom = scanner.nextLine();
-                    System.out.print("Prénom : ");
-                    String prenom = scanner.nextLine();
-                    System.out.print("Email : ");
-                    String email = scanner.nextLine();
-
-                    Membre nouveauMembre = new Membre(0, nom, prenom, email, LocalDateTime.now());
-                    membreDAO.inscrireMembre(nouveauMembre);
+                    System.out.print("Titre à rechercher : ");
+                    String search = scanner.nextLine();
+                    List<Livre> results = livreDAO.rechercherParTitre(search);
+                    results.forEach(l -> System.out.println(l.getId() + " - " + l.getTitre()));
                     break;
-
                 case 3:
-                    System.out.print("ID du Membre : ");
-                    int idMembre = scanner.nextInt();
-                    System.out.print("ID du Livre : ");
-                    int idLivre = scanner.nextInt();
-
-                    empruntDAO.enregistrerEmprunt(idMembre, idLivre);
+                    System.out.print("Nom : "); String nom = scanner.nextLine();
+                    System.out.print("Prénom : "); String prenom = scanner.nextLine();
+                    System.out.print("Email : "); String mail = scanner.nextLine();
+                    membreDAO.inscrireMembre(new Membre(0, nom, prenom, mail, LocalDateTime.now()));
                     break;
-
                 case 4:
-                    System.out.print("ID de l'emprunt à clôturer : ");
-                    int idEmprunt = scanner.nextInt();
+                    System.out.print("Nom du membre : ");
+                    String nomM = scanner.nextLine(); // On utilise nextLine() pour les noms
+                    System.out.print("Titre du livre : ");
+                    String titreL = scanner.nextLine();
 
-                    empruntDAO.gererRetour(idEmprunt);
+                    // Appel de la méthode avec les Strings
+                    EmpruntDAO.enregistrerEmprunt(nomM, titreL);
                     break;
-
                 case 5:
-                    System.out.print("Entrez le titre (ou partie du titre) : ");
-                    String recherche = scanner.nextLine();
-                    List<Livre> livres = livreDAO.rechercherParTitre(recherche);
-
-                    System.out.println("\nRésultats de la recherche :");
-                    for (Livre l : livres) {
-                        System.out.println(l.getId() + " - " + l.getTitre() + " (" + l.getAuteur() + ")");
-                    }
+                    EmpruntDAO.afficherEmpruntsEnRetard();
                     break;
-
                 case 6:
-                    System.out.println("Fermeture de l'application...");
+                    System.out.println("Au revoir !");
                     break;
-
-                default:
-                    System.out.println("Choix invalide, veuillez réessayer.");
             }
         } while (choix != 6);
-
         scanner.close();
     }
 }

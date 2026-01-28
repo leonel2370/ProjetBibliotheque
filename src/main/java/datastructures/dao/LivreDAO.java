@@ -38,7 +38,7 @@ import java.util.List;
                 while (rs.next()) {
                     resultats.add(new Livre(rs.getInt("id"), rs.getString("titre"),
                             rs.getString("auteur"), rs.getString("categorie"),
-                            rs.getInt("nb_exemplaires")));
+                            rs.getInt("nombre_exemplaires")));
                 }
             } catch (SQLException e) { e.printStackTrace(); }
             return resultats;
