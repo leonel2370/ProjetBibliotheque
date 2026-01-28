@@ -29,7 +29,7 @@ import java.util.List;
 
         public List<Livre> rechercherParTitre(String titre) {
             List<Livre> resultats = new ArrayList<>();
-            String sql = "SELECT * FROM livres WHERE titre ILIKE ?"; // ILIKE pour insensible à la casse
+            String sql = "SELECT * FROM livres WHERE titre ILIKE ?";
             try (Connection conn = DBConnection.getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -38,7 +38,7 @@ import java.util.List;
                 while (rs.next()) {
                     resultats.add(new Livre(rs.getInt("id"), rs.getString("titre"),
                             rs.getString("auteur"), rs.getString("categorie"),
-                            rs.getInt("nb_exemplaires")));
+                            rs.getInt("nombre_exemplaires")));
                 }
             } catch (SQLException e) { e.printStackTrace(); }
             return resultats;
