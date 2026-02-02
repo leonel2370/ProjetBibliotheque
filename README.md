@@ -1,9 +1,9 @@
 # ProjetBibliotheque
 projet de consildation des acquis sur la programmation oriente objet avec  java pour la formation k48
-📚 Système de Gestion de Bibliothèque (Java/PostgreSQL)
+Système de Gestion de Bibliothèque (Java/PostgreSQL)
 
 Ce projet est une application de gestion de bibliothèque réalisée en Java, utilisant une base de données PostgreSQL pour la persistance des données. Elle permet de gérer les livres, les membres, les emprunts et le calcul automatique des pénalités de retard.
-🛠️ Fonctionnalités
+ Fonctionnalités
 
     Gestion des Livres : Ajout, recherche par titre/catégorie, suivi des exemplaires.
 
@@ -13,7 +13,7 @@ Ce projet est une application de gestion de bibliothèque réalisée en Java, ut
 
     Calcul des Pénalités : Calcul automatique de 100 F CFA par jour de retard.
 
-🗄️ Structure de la Base de Données
+ Structure de la Base de Données
 
 Le projet utilise trois tables principales :
 
@@ -70,7 +70,7 @@ CREATE TABLE emprunts (
 
 3. Configuration du projet
 
-    Modifiez la classe DatabaseConnection.java avec vos identifiants PostgreSQL :
+    Modifiez la classe DBConnection.java avec vos identifiants PostgreSQL :
 
         URL :"jdbc:postgresql://localhost:5432/gestion_bibliotheque"
 
@@ -78,7 +78,7 @@ CREATE TABLE emprunts (
 
         PASSWORD : votre_mot_de_passe
 
-🧪 Exécution des Tests
+ Exécution des Tests
 
 Pour vérifier le bon fonctionnement du système, lancez la classe Main.java. Vous pouvez utiliser les données de test intégrées pour valider :
 
